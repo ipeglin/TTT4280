@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import scipy.signal as signal
 
 SHOW_PLOT = False
-SAVE_PLOT = True
+SAVE_PLOT = False
 
 if __name__ == '__main__':
   figure_font_size = 12
@@ -82,10 +82,9 @@ if __name__ == '__main__':
       fft = np.fft.fft(sign, num_samples)
       fft = np.fft.fftshift(fft)
       rel_fft = 20*np.log10(fft / np.max(fft))
+      
       freq_max_at = np.argmax(fft)
-
-      freq_max = fft_ax[freq_max_at]
-      doppler_freq = freq_max
+      doppler_freq = fft_ax[freq_max_at]
       print(f'Doppler freqency: {doppler_freq:.3f} Hz')
 
       # compute velocity
@@ -99,8 +98,8 @@ if __name__ == '__main__':
       fig, ax = plt.subplots()
       fig.supxlabel('Frekvens (Hz)')
       fig.suptitle(f'FFT av I-Q kanaler ({file})')
-      ax.annotate(f"{freq_max:.3f} Hz", (freq_max + 10000*df, np.max(rel_fft) - 0.75*figure_font_size)) # Offset annotation text
-      ax.plot(freq_max, np.max(rel_fft), marker="o", color="black")
+      ax.annotate(f"{doppler_freq:.3f} Hz", (doppler_freq + 10000*df, np.max(rel_fft) - 0.75*figure_font_size)) # Offset annotation text
+      ax.plot(doppler_freq, np.max(rel_fft), marker="o", color="black")
       ax.plot(fft_ax, rel_fft, color='b')
       plt.tight_layout()
 
