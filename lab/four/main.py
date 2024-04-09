@@ -109,8 +109,8 @@ if __name__ == '__main__':
       car_top_speed = 3 # m/s
       car_max_doppler_freq = int(2 * car_top_speed * center_freq / c)
 
-      zero_freq_index = np.where(fft == np.max(fft))[0][0]
-      signal_interval = (zero_freq_index - car_max_doppler_freq, zero_freq_index + car_max_doppler_freq + 1)
+      zero_indeces = np.where(fft == np.max(fft))[0][0]
+      signal_interval = (zero_indeces - car_max_doppler_freq, zero_indeces + car_max_doppler_freq + 1)
 
       sign_s = np.mean(np.abs(fft[signal_interval[0]:signal_interval[1]]))
       
