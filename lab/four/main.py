@@ -107,7 +107,7 @@ if __name__ == '__main__':
         plt.savefig(f'{dirname}/plots/{measurement_set}/{file}_fft.svg')
 
       car_top_speed = 3 # m/s
-      car_max_doppler_freq = int(2 * car_top_speed * center_freq / c)
+      car_max_doppler_freq = np.round(2 * car_top_speed * center_freq / c, decimals=0).astype(int)
 
       zero_indeces = np.where(fft == np.max(fft))[0][0]
       signal_interval = (zero_indeces - car_max_doppler_freq, zero_indeces + car_max_doppler_freq + 1)
