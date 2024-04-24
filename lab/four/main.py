@@ -59,7 +59,6 @@ if __name__ == '__main__':
       sign_q = signal.detrend(data[:, 1][omitted_samples:])
 
       sign = sign_i + 1j * sign_q
-      sign = sign
 
       sample_freq = 1 / sample_period
       num_samples = data.shape[0] - omitted_samples
@@ -81,7 +80,7 @@ if __name__ == '__main__':
       fft_ax = np.arange(-sample_freq/2, sample_freq/2, df)
       fft = np.fft.fft(sign, num_samples)
       fft = np.fft.fftshift(fft)
-      rel_fft = 20*np.log10(fft / np.max(fft))
+      rel_fft = 20 * np.log10(fft / np.max(fft))
       
       freq_max_at = np.argmax(fft)
       doppler_freq = fft_ax[freq_max_at]
@@ -128,4 +127,15 @@ if __name__ == '__main__':
     if SHOW_PLOT:
       plt.show()
       
-  print('Results:', results)
+  print('Results:', results, end='\n\n')
+  for set_name, res in results.items():
+    print(f'Summarising {set_name}:')
+    print(f'''\t  Velocity measurements: {res["velocities"]}
+          Average: {np.mean(res["velocities"]):.3f} m/s | STD: {res["std_vel"]:.3f} m/s
+
+          SNR measurements: {res["snr"]}
+          Average: {np.mean(res["snr"]):.3f} | STD: {res["std_snr"]:.3f}''')
+    for i in range(len(res['velocities'])):
+      print(f'Måling {i + 1} & {res["velocities"][i]:.3f} & {res["snr"][i]:.3f} \\\\')
+    
+    print(f'{"#" * (14 + len(set_name))}\n')
