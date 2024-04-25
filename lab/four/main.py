@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import scipy.signal as signal
 
 SHOW_PLOT = False
-SAVE_PLOT = True
+SAVE_PLOT = False
 
 if __name__ == '__main__':
   figure_font_size = 12
