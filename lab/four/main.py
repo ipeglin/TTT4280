@@ -100,6 +100,7 @@ if __name__ == '__main__':
       ax.annotate(f"{doppler_freq:.3f} Hz", (doppler_freq + 10000*df, np.max(rel_fft) - 0.75*figure_font_size)) # Offset annotation text
       ax.plot(doppler_freq, np.max(rel_fft), marker="o", color="black")
       ax.plot(fft_ax, rel_fft, color='b')
+      ax.set_xlim(-800, 800)
       plt.tight_layout()
 
       if SAVE_PLOT:
