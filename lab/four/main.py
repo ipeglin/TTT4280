@@ -69,7 +69,7 @@ if __name__ == '__main__':
       fig.supxlabel('Tid (s)')
       fig.supylabel('Amplitude (V)')
       fig.suptitle(f'I-Q kanaler v. tid ({file})')
-      plt.grid(linestyle='-')
+      plt.grid(linestyle=':')
       ax.plot(axis, np.vstack([sign.real, sign.imag]).T)
       plt.tight_layout()
 
@@ -99,7 +99,7 @@ if __name__ == '__main__':
       fig.supxlabel('Frekvens (Hz)')
       fig.suptitle(f'FFT av I-Q kanaler ({file})')
       ax.annotate(f"{doppler_freq:.3f} Hz", (doppler_freq + 10000*df, np.max(rel_fft) - 0.75*figure_font_size)) # Offset annotation text
-      plt.grid(linestyle='-')
+      plt.grid(linestyle=':')
       ax.plot(doppler_freq, np.max(rel_fft), marker="o", color="black")
       ax.plot(fft_ax, rel_fft, color='b')
       ax.set_xlim(-800, 800)
